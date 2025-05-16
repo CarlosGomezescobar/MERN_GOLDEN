@@ -100,6 +100,10 @@ MERN_GOLDEN/
 │   ├── incident-response/  # Playbooks para incidentes de seguridad
 │   ├── cost-optimization/  # Scripts de monitorización de costos (CloudHealth)
 │   └── drift-detection/    # Detección de desviaciones (Driftctl)
+│   └── infrastructure/
+│   │   ├── terraform/main.tf
+│   └── monitoring
+│   │   ├── prometheus/prometheus.yml
 │
 ├── docs/                   # Documentación
 │   ├── architecture/       # Diagramas C4 y de flujo de datos

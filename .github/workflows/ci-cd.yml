@@ -1,0 +1,28 @@
+# .github/workflows/ci-cd.yml
+name: Secure Pipeline
+on: [push, pull_request]
+jobs:
+  sast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bandit (Python)
+        run: bandit -r .
+      - name: Slither (Solidity)
+        run: slither .
+  snyk-sca:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to AWS
+        env:
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        run: |
+          aws ecs update-service --cluster goldencity
