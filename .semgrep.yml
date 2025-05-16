@@ -1,0 +1,26 @@
+rules:
+  - id: secure-express-config
+    patterns:
+      - pattern: |
+          app.use(helmet())
+    message: "Helmet.js debe configurarse con políticas explícitas"
+    languages: [javascript]
+    severity: WARNING
+
+  - id: no-hardcoded-secrets
+    patterns:
+      - pattern-inside: |
+          const .* = '.*';
+      - pattern: |
+          .*SECRET.* = '.*'
+    message: "Posible secreto codificado en texto plano"
+    languages: [javascript]
+    severity: ERROR
+
+  - id: unsafe-dockerfile
+    patterns:
+      - pattern: |
+          FROM node:latest
+    message: "Usar imágenes distroless o alpine en producción"
+    languages: [dockerfile]
+    severity: ERROR

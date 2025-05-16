@@ -62,6 +62,16 @@ docker-compose up -d
 trivy image backend:latest  
 snyk container test frontend:latest --severity-threshold=high  
 
+
+#!/bin/bash
+# Escanear backend
+semgrep --config=p/owasp-top-ten backend/
+# Escanear frontend
+semgrep --config=p/react frontend/
+# Escanear contratos
+semgrep --config=p/solidity contracts/
+
+
 ## Project Structure
 
 MERN_GOLDEN/

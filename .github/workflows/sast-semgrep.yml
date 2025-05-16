@@ -1,0 +1,48 @@
+name: SAST with Semgrep
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  semgrep-sast:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials (for production reports)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Run Semgrep SAST
+        uses: returntocorp/semgrep-action@v2
+        with:
+          config: |
+            p/owasp-top-ten
+            p/nodejs
+            p/react
+            p/dockerfile
+          publish_token: ${{ secrets.SEMGREP_TOKEN }}
+          severity: "ERROR,WARNING"
+          output_format: "sarif"
+          output: "semgrep-results.sarif"
+
+      - name: Upload SARIF report to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: semgrep-results.sarif
+
+      - name: Fail on critical findings
+        run: |
+          if [ $(jq '.runs[0].results | length' semgrep-results.sarif) -gt 0 ]; then
+            echo "Critical security issues found!"
+            exit 1
+          fi
