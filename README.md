@@ -1,4 +1,4 @@
-# MERN_GOLDEN - Plataforma Inmobiliaria Blockchain  
+# MERN_GOLDEN - Plataforma "DAPP" Blockchain  
 ![Build Status](https://github.com/CarlosGomezescobar/MERN_GOLDEN/actions/workflows/ci-cd.yml/badge.svg )  
 ![Security Rating](https://snyk.io/test/github/CarlosGomezescobar/MERN_GOLDEN/badge.svg )  
 ![License](https://img.shields.io/badge/license-MIT-green )
@@ -29,20 +29,10 @@ Plataforma inmobiliaria descentralizada que combina:
 | Node.js    | 20.x    |  
 | Docker     | 26.x+   |  
 | MongoDB    | 7.x     |  
-| Solidity   | 0.8.24  |  
+| Solidity   | 0.8.24  | 
 
-**Variables de Entorno** (copiar `.env.example`):  
-```bash
-# Backend
-MONGODB_URL=mongodb+srv://<user>:<pass>@cluster.mongodb.net/goldencity  
-JWT_SECRET=supersecretkey  
-PORT=5000  
 
-# Frontend
-REACT_APP_API_URL=http://localhost:5000  
-REACT_APP_BLOCKCHAIN_NETWORK=polygon_mumbai  
-
-Estructura Propuesta del Proyecto
+## Estructura Propuesta del Proyecto
 
 MERN_GOLDEN/
 ├── backend/                # Backend centralizado (Express + MongoDB)
@@ -143,6 +133,19 @@ graph TD
     style D fill:#9C27B0,stroke:#7B1FA2
     style E fill:#607D8B,stroke:#455A64
     style F fill:#E91E63,stroke:#C2185B
+
+**Variables de Entorno** (copiar `.env.example`):  
+```bash
+# Backend
+MONGODB_URL=mongodb+srv://<user>:<pass>@cluster.mongodb.net/goldencity  
+JWT_SECRET=supersecretkey  
+PORT=5000  
+
+# Frontend
+REACT_APP_API_URL=http://localhost:5000  
+REACT_APP_BLOCKCHAIN_NETWORK=polygon_mumbai  
+
+
 
 # Clonar repositorio
 git clone https://github.com/CarlosGomezescobar/MERN_GOLDEN.git   
