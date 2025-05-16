@@ -2,7 +2,7 @@ FROM node:20.19.1-alpine3.19 AS builder
 
 # Etiquetas de metadatos para trazabilidad y seguridad
 LABEL maintainer="Carlos Gomez DevSecOps <gg.20twenty1@gmail.com>"
-LABEL org.opencontainers.image.source="https://github.com/CarlosGomezescobar/golden "
+LABEL org.opencontainers.image.source="https://github.com/CarlosGomezescobar/MERN_GOLDEN "
 
 # Configuración de usuario no-root
 RUN addgroup --system appgroup && \
