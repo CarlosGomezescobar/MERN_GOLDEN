@@ -1,30 +1,30 @@
-# MERN_GOLDEN - Plataforma "DAPP" Blockchain  
+# MERN_GOLDEN - Blockchain "DAPP" Platform 
 ![Build Status](https://github.com/CarlosGomezescobar/MERN_GOLDEN/actions/workflows/ci-cd.yml/badge.svg )  
 ![Security Rating](https://snyk.io/test/github/CarlosGomezescobar/MERN_GOLDEN/badge.svg )  
 ![License](https://img.shields.io/badge/license-MIT-green )
 
-## Descripción del Proyecto  
-Plataforma inmobiliaria descentralizada que combina:  
-- **Backend Centralizado**: Node.js + Express + MongoDB con autenticación JWT y seguridad DevSecOps  
-- **Frontend 3D**: React + Three.js con visualización inmersiva de propiedades  
-- **Blockchain Integration**: Contratos inteligentes en Solidity para transacciones seguras  
-- **Infraestructura Segura**: Docker multi-etapa, imágenes distroless y pipelines CI/CD con análisis de vulnerabilidades  
+## Project Description  
+Decentralized Web3 platform combining:  
+- **Centralized Backend**: Node.js + Express + MongoDB with JWT authentication and DevSecOps security 
+- **3D Frontend**: React + Three.js with immersive property visualization  
+- **Blockchain Integration**: Solidity smart contracts for secure transactions 
+- **Secure Infrastructure**: Multi-stage Docker, distroless images, and vulnerability-scanned CI/CD pipelines
 
 ---
 
-## Tabla de Contenidos  
-1. [Requisitos](#requisitos)  
-2. [Instalación](#instalación)  
-3. [Seguridad](#seguridad)  
-4. [Despliegue](#despliegue)  
-5. [Monitoreo](#monitoreo)  
-6. [Contribución](#contribución)  
-7. [Licencia](#licencia)  
+## Table of Contents 
+1. [Requirements](#requirements)  
+2. [Installation](#installation)  
+3. [Security](#security)  
+4. [Deployment](#deployment)  
+5. [Monitoring](#monitoring)  
+6. [Contribution](#contribution)  
+7. [License](#license)  
 
 ---
 
-## Requisitos  
-| Componente | Versión |  
+## Requirements  
+| Component  | Version |  
 |------------|---------|  
 | Node.js    | 20.x    |  
 | Docker     | 26.x+   |  
@@ -32,109 +32,7 @@ Plataforma inmobiliaria descentralizada que combina:
 | Solidity   | 0.8.24  | 
 
 
-## Estructura Propuesta del Proyecto
-
-MERN_GOLDEN/
-├── backend/                # Backend centralizado (Express + MongoDB)
-│   ├── config/             # Configuración (DB, autenticación, seguridad)
-│   │   └── database.js     # Conexión a MongoDB con Mongoose
-│   ├── controllers/        # Lógica de negocio (ej: healthController.js)
-│   ├── middleware/         # Middlewares de seguridad (auth, logging, rate-limiting)
-│   ├── models/             # Modelos de datos (Mongoose)
-│   ├── routes/             # Rutas API (ej: healthRoute.js)
-│   ├── utils/              # Funciones auxiliares (validaciones, hashing)
-│   ├── Dockerfile          # Dockerfile multi-etapa con imagen distroless
-│   ├── app.js              # Configuración principal de Express
-│   ├── server.js           # Inicialización del servidor
-│   └── package.json        # Dependencias y scripts
-│
-├── frontend/               # Frontend React + Three.js
-│   ├── public/             # Archivos estáticos (favicon, manifest)
-│   ├── src/                # Código fuente
-│   │   ├── components/     # Componentes reutilizables (ej: PropertyViewer.jsx)
-│   │   ├── hooks/          # Hooks personalizados (ej: useBlockchain.ts)
-│   │   ├── pages/          # Páginas (Home, Dashboard, etc.)
-│   │   ├── context/        # State management con Context API o Jotai
-│   │   ├── services/       # API clients y conexión con contratos inteligentes
-│   │   ├── assets/         # Imágenes, íconos, modelos 3D
-│   │   ├── styles/         # Estilos globales (Tailwind + CSS Modules)
-│   │   ├── App.tsx         # Componente raíz
-│   │   ├── index.tsx       # Punto de entrada
-│   │   └── react-app-env.d.ts # Tipos globales
-│   ├── Dockerfile          # Imagen NGINX con seguridad reforzada
-│   └── package.json        # Dependencias y scripts
-│
-├── contracts/              # Contratos inteligentes (Solidity)
-│   ├── artifacts/          # ABIs generados por Hardhat
-│   ├── scripts/            # Scripts de despliegue (ej: deploy.js)
-│   ├── test/               # Pruebas unitarias (Waffle/Mocha)
-│   ├── hardhat.config.js   # Configuración de Hardhat
-│   ├── Dockerfile          # Entorno de desarrollo con Hardhat
-│   └── README.md           # Guía de despliegue y seguridad
-│
-├── libs/                   # Librerías compartidas
-│   ├── abis/               # ABIs de contratos (generados automáticamente)
-│   ├── constants/          # Direcciones de contratos y URLs
-│   ├── helpers/            # Funciones para interactuar con la blockchain
-│   └── types/              # Tipos TypeScript para contratos y servicios
-│
-├── devops/                 # DevSecOps Integrado
-│   ├── threat-modeling/    # Modelos de amenazas (ej: STRIDE)
-│   ├── security/
-│   │   ├── sast/           # Configuración ESLint/Slither para SAST
-│   │   ├── dast/           # OWASP ZAP para pruebas dinámicas
-│   │   ├── sca/            # Snyk + Trivy para análisis de dependencias
-│   │   └── compliance/     # Políticas GDPR/PCI-DSS (Open Policy Agent)
-│   ├── chaos-engineering/  # Experimentos con Chaos Monkey
-│   ├── secrets-management/ # Integración con AWS Secrets Manager
-│   ├── incident-response/  # Playbooks para incidentes de seguridad
-│   ├── cost-optimization/  # Scripts de monitorización de costos (CloudHealth)
-│   └── drift-detection/    # Detección de desviaciones (Driftctl)
-│   └── infrastructure/
-│   │   ├── terraform/main.tf
-│   └── monitoring
-│   │   ├── prometheus/prometheus.yml
-│
-├── docs/                   # Documentación
-│   ├── architecture/       # Diagramas C4 y de flujo de datos
-│   ├── api-docs/           # Documentación OpenAPI/Swagger
-│   ├── smart-contracts/    # Especificaciones técnicas de contratos
-│   └── user-manual/        # Guía de usuario
-│
-├── tests/                  # Pruebas automatizadas
-│   ├── integration/        # Pruebas de integración (Supertest/Jest)
-│   ├── e2e/                # Pruebas end-to-end (Cypress)
-│   └── unit/               # Pruebas unitarias (Jest/Mocha)
-│
-├── .github/                # GitHub Actions
-│   └── workflows/          # Pipelines CI/CD con seguridad integrada
-│
-├── .husky/                 # Git hooks para pre-commit (lint-staged)
-├── .env.example            # Plantilla de variables de entorno
-├── .gitignore              # Archivos ignorados
-├── docker-compose.yml      # Orquestación de servicios (MongoDB, Nginx)
-├── package.json            # Dependencias globales (concurrently, etc.)
-└── README.md               # Documentación principal
-
-##Graph 
-graph TD
-    A[Frontend] -->|HTTPS Mutual TLS| B[API Gateway]
-    B --> C[Auth Service]
-    B --> D[Blockchain Proxy]
-    C -->|JWT Validation| E[Backend Services]
-    D -->|gRPC| F[Smart Contracts]
-    E --> G[Database]
-    E --> H[External APIs]
-    F --> I[Blockchain Nodes]
-    
-    style A fill:#4CAF50,stroke:#388E3C
-    style B fill:#2196F3,stroke:#1976D2
-    style C fill:#FF9800,stroke:#F57C00
-    style D fill:#9C27B0,stroke:#7B1FA2
-    style E fill:#607D8B,stroke:#455A64
-    style F fill:#E91E63,stroke:#C2185B
-
-**Variables de Entorno** (copiar `.env.example`):  
+**Environment Variables** (copiar `.env.example`):  
 ```bash
 # Backend
 MONGODB_URL=mongodb+srv://<user>:<pass>@cluster.mongodb.net/goldencity  
@@ -145,23 +43,105 @@ PORT=5000
 REACT_APP_API_URL=http://localhost:5000  
 REACT_APP_BLOCKCHAIN_NETWORK=polygon_mumbai  
 
-
-
-# Clonar repositorio
-git clone https://github.com/CarlosGomezescobar/MERN_GOLDEN.git   
+# Clone repository
+git clone https://github.com/CarlosGomezescobar/MERN_GOLDEN.git  
 cd MERN_GOLDEN  
 
-# Instalar dependencias
-`npm install --prefix backend`
+# Install dependencies
+npm install --prefix backend
 npm install --prefix frontend  
 
-# Iniciar servicios
+# Start services
 npm run start  
 
-# Construir imágenes con Snyk scanning
+# Build images with Snyk scanning
 docker-compose -f docker-compose.dev.yml build  
 docker-compose up -d  
 
-# Escanear vulnerabilidades
+# Vulnerability scanning
 trivy image backend:latest  
 snyk container test frontend:latest --severity-threshold=high  
+
+## Project Structure
+
+MERN_GOLDEN/
+├── backend/                # Centralized Backend (Express + MongoDB)
+│   ├── config/             # Configuration (DB, auth, security)
+│   │   └── database.js     # MongoDB connection with Mongoose
+│   ├── controllers/        # Business logic (e.g., healthController.js)
+│   ├── middleware/         # Security middlewares (auth, logging, rate-limiting)
+│   ├── models/             # Data models (Mongoose)
+│   ├── routes/             # API routes (e.g., healthRoute.js)
+│   ├── utils/              # Helper functions (validations, hashing)
+│   ├── Dockerfile          # Multi-stage Dockerfile with distroless image
+│   ├── app.js              # Express main configuration
+│   ├── server.js           # Server initialization
+│   └── package.json        # Dependencies and scripts
+│
+├── frontend/               # React + Three.js Frontend
+│   ├── public/             # Static files (favicon, manifest)
+│   ├── src/                # Source code
+│   │   ├── components/     # Reusable components (e.g., PropertyViewer.jsx)
+│   │   ├── hooks/          # Custom hooks (e.g., useBlockchain.ts)
+│   │   ├── pages/          # Pages (Home, Dashboard, etc.)
+│   │   ├── context/        # State management (Context API or Jotai)
+│   │   ├── services/       # API clients and smart contract connections
+│   │   ├── assets/         # Images, icons, 3D models
+│   │   ├── styles/         # Global styles (Tailwind + CSS Modules)
+│   │   ├── App.tsx         # Root component
+│   │   ├── index.tsx       # Entry point
+│   │   └── react-app-env.d.ts # Global types
+│   ├── Dockerfile          # NGINX image with hardened security
+│   └── package.json        # Dependencies and scripts
+│
+├── contracts/              # Smart Contracts (Solidity)
+│   ├── artifacts/          # Hardhat-generated ABIs
+│   ├── scripts/            # Deployment scripts (e.g., deploy.js)
+│   ├── test/               # Unit tests (Waffle/Mocha)
+│   ├── hardhat.config.js   # Hardhat configuration
+│   ├── Dockerfile          # Hardhat development environment
+│   └── README.md           # Deployment and security guide
+│
+├── libs/                   # Shared libraries
+│   ├── abis/               # Contract ABIs (auto-generated)
+│   ├── constants/          # Contract addresses and URLs
+│   ├── helpers/            # Blockchain interaction functions
+│   └── types/              # TypeScript types for contracts and services
+│
+├── devops/                 # Integrated DevSecOps
+│   ├── threat-modeling/    # Threat models (e.g., STRIDE)
+│   ├── security/
+│   │   ├── sast/           # ESLint/Slither SAST configuration
+│   │   ├── dast/           # OWASP ZAP for dynamic testing
+│   │   ├── sca/            # Snyk + Trivy dependency analysis
+│   │   └── compliance/     # GDPR/PCI-DSS policies (Open Policy Agent)
+│   ├── chaos-engineering/  # Chaos Monkey experiments
+│   ├── secrets-management/ # AWS Secrets Manager integration
+│   ├── incident-response/  # Security incident playbooks
+│   ├── cost-optimization/  # Cloud cost monitoring scripts (CloudHealth)
+│   └── drift-detection/    # Configuration drift detection (Driftctl)
+│   └── infrastructure/
+│   │   ├── terraform/main.tf
+│   └── monitoring
+│   │   ├── prometheus/prometheus.yml
+│
+├── docs/                   # Documentation
+│   ├── architecture/       # C4 and data flow diagrams
+│   ├── api-docs/           # OpenAPI/Swagger documentation
+│   ├── smart-contracts/    # Technical contract specifications
+│   └── user-manual/        # User guide
+│
+├── tests/                  # Automated tests
+│   ├── integration/        # Integration tests (Supertest/Jest)
+│   ├── e2e/                # End-to-end tests (Cypress)
+│   └── unit/               # Unit tests (Jest/Mocha)
+│
+├── .github/                # GitHub Actions
+│   └── workflows/          # CI/CD pipelines with integrated security
+│
+├── .husky/                 # Git hooks for pre-commit (lint-staged)
+├── .env.example            # Environment variables template
+├── .gitignore              # Ignored files
+├── docker-compose.yml      # Service orchestration (MongoDB, Nginx)
+├── package.json            # Global dependencies (concurrently, etc.)
+└── README.md               # Main documentation
